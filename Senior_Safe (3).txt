@@ -30,9 +30,9 @@ create table adultomayor(
   adultomayor_id INTEGER PRIMARY KEY,
   nombre TEXT NOT NULL,
   apellidos TEXT NOT NULL,
-  Cedula INTEGER,
+  Cedula BIGINT,
   edad INTEGER,
-  telefono INTEGER,
+  telefono BIGINT,
   direccion VARCHAR(100),
   hogar_id INTEGER  
 );
@@ -51,7 +51,7 @@ create table alerta(
   nivel_riesgo VARCHAR(100),
   estado VARCHAR(50),
   hogar_id INTEGER,
-  FOREIGN KEY (alerta_id) REFERENCES hogar(hogar_id)
+  FOREIGN KEY (hogar_id) REFERENCES hogar(hogar_id)
 );
 INSERT INTO adultomayor(adultomayor_id,nombre,apellidos) VALUES
 (1,'Ana','perez'),
@@ -133,11 +133,50 @@ INSERT INTO padecer(adultomayor_id,diagnostico_id) VALUES
 (13,'112'),
 (14,'113'),
 (15,'114');
+INSERT INTO alerta(alerta_id,fecha_hora,tipo_alerta,nivel_riesgo,estado,hogar_id) VALUES
+(400,'2026-10-22 15:00', 'desorientacion','bajo','pendiete','300'),
+(401,'2026-01-01 14:00', 'caida','alto','proceso','301'),
+(402,'2026-02-02 12:00', 'olvido','medio','pendiente','302'),
+(403,'2026-12-01 07:00', 'agitacion','alto','proceso','303'),
+(404,'2025-05-08 06:00', 'emergencia_medica','alto','proceso','304'),
+(405,'206-02-01 15:00', 'deambulacion','medio','resuelto','305'),
+(406,'2024-01-08 12:00','caida','alto','resuelto','306'),
+(407,'2026-05-05 06:00', 'olvido','bajo','activo','307'),
+(408,'2026-07-08 05:00', 'agitacion','medio','activo','308'),
+(409,'2024-07-08 16:00', 'emergencia_medica','critico','resuelto','309'),
+(410,'2026-09-10 12:00', 'deambulacion','bajo','falsa_alarma','310'),
+(411,'2026-08-08 07:00', 'desorientacion','bajo','proceso','311'),
+(412,'2026-07-08 01:00', 'caida','alto','falsa_alarma','312'),
+(413,'2025 09-08 18:00', 'olvido','baja','proceso','313'),
+(414,'2026-05-08 19:00', 'agitacion','medio','resuelto','314');
 
+UPDATE adultomayor
+SET nombre='juanita'
+WHERE adultomayor_id=1;
 
+ALTER TABLE adultomayor ADD COLUMN fase_etapa VARCHAR;
+SELECT *
+FROM alerta
+WHERE fecha_hora BETWEEN '2026-01-01 01:00' AND '2026-12-31 23:59';
 
+SELECT *
+FROM familiar
+WHERE correo IS NULL;
 
-
-
-
+UPDATE adultomayor 
+SET Cedula = CASE adultomayor_id 
+    WHEN 1 THEN 10203040 
+    WHEN 2 THEN 10235288 
+    WHEN 3 THEN 10252525 
+    WHEN 4 THEN 10332525 
+    WHEN 5 THEN 10369858 
+    WHEN 6 THEN 10258828 
+    WHEN 7 THEN 10256393 
+    WHEN 8 THEN 10258633 
+    WHEN 9 THEN 10258977 
+    WHEN 10 THEN 10258282 
+    WHEN 11 THEN 10258525 
+    ELSE Cedula 
+END 
+WHERE adultomayor_id BETWEEN 1 AND 11;
 

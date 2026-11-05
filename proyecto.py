@@ -99,6 +99,26 @@ precision = accuracy_score(Y_test, predicciones)
 
 print(f"precision del modelo: {precision * 100}%")
 
+#6 simulando caso nuevo***
+
+adulto_nuevo = pd.DataFrame({
+    'edad': [78],
+    'fase_num': [10]
+})
+
+
+#pedimos al modelo que adivine el nivel de riesgo de este adulto_nuevo
+
+prediccion_nuevo = modelo.predict(adulto_nuevo)
+
+#mostramos el resultado
+
+if prediccion_nuevo[0]==1:
+    print("Alerta el modelo predice que este adulto tiene un nivel de riesgo CRITICO O ALTO.")
+else:
+  print("El modelo predice que este adulto tiene un nivel de riesgo BAJO O NORMAL.")          
+
+
 
 # Cerrar conexión
 

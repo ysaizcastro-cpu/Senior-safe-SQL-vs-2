@@ -43,7 +43,7 @@ df['nivel_num'] = df['nivel_riesgo'].apply(lambda x: 1 if str(x).lower() in ['cr
 
 # La fase grave moderada ---10 --- de lo contrario 0
 
-df['fase_num'] = df['fase_etapa'].apply(lambda x: 10 if str (x).lower() in ['grave','moderado'] else 0)
+df['fase_num'] = df['fase_etapa'].apply(lambda x: 10 if str (x).lower() in ['grave','moderada'] else 0)
 
 # 4. Calcular porcentajes usando los textos originales de los niveles de riesgo
 
@@ -71,13 +71,13 @@ print(df_porcentajes)
 # PASO 6: Entrenar la Inteligencia Artificial
 # ==========================================
 
-# 1. Definir X (las pistas o características: edad y fase de la patología)
+# 1. Definir X (las pistas o características: edad y fase de la patología)***definir x pistas edad, y fase num (etapa Y **lo que queremos predecir nivel de riesgo)
 
-X = df[['edad', 'nivel_num']]  # O las columnas numéricas que uses para el modelo
+X = df[['edad', 'fase_num']]  
 
 # 2. Definir Y (lo que queremos adivinar: si el riesgo es alto/crítico o no)
 
-Y = df['nivel_num']
+Y = df['nivel_num']  
 
 # 3. Dividir los datos (80% para estudiar/entrenar, 20% para el examen/prueba)
 
@@ -91,6 +91,13 @@ modelo = DecisionTreeClassifier()
 modelo.fit(X_train, Y_train)  # ¡Aquí la IA aprende con los datos de entrenamiento!
 
 print("¡El modelo de Inteligencia Artificial de Senior Safe ha sido entrenado con éxito!")
+
+#5 evaluar modelo datos nuevos 
+
+predicciones = modelo.predict(X_test)
+precision = accuracy_score(Y_test, predicciones)
+
+print(f"precision del modelo: {precision * 100}%")
 
 
 # Cerrar conexión

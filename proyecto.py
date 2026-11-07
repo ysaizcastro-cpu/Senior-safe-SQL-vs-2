@@ -67,11 +67,11 @@ print(df)
 print("=== RESUMEN DE PORCENTAJES POR NIVEL DE RIESGO ===")
 print(df_porcentajes)
 
-# ==========================================
-# PASO 6: Entrenar la Inteligencia Artificial
-# ==========================================
 
-# 1. Definir X (las pistas o características: edad y fase de la patología)***definir x pistas edad, y fase num (etapa Y **lo que queremos predecir nivel de riesgo)
+# PASO 6: Entrenar la Inteligencia Artificial
+
+
+# 1. Definir X (las pistas o características: edad y fase de la patología)---definir x pistas edad, y fase num (etapa Y --lo que queremos predecir nivel de riesgo)
 
 X = df[['edad', 'fase_num']]  
 

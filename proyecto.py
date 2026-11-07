@@ -1,6 +1,7 @@
 import pandas as pd
 import psycopg
 import sklearn
+import joblib
 
 # Piezas del "cerebro artificial" de Scikit-learn
 from sklearn.model_selection import train_test_split
@@ -113,11 +114,14 @@ prediccion_nuevo = modelo.predict(adulto_nuevo)
 
 #mostramos el resultado
 
-if prediccion_nuevo[0]==1:
-    print("Alerta el modelo predice que este adulto tiene un nivel de riesgo CRITICO O ALTO.")
+if prediccion_nuevo[0] == 1:
+    print("\n🚨 Alerta: El modelo predice que este adulto tiene un nivel de riesgo CRITICO O ALTO.")
 else:
-  print("El modelo predice que este adulto tiene un nivel de riesgo BAJO O NORMAL.")          
+    print("\n✅ El modelo predice que este adulto tiene un nivel de riesgo BAJO O NORMAL.")           
 
+
+joblib.dump(modelo, 'modelo_seniorsafe.pkl')
+print("📦 ¡Modelo exportado con éxito a 'modelo_seniorsafe.pkl'!")
 
 
 # Cerrar conexión
